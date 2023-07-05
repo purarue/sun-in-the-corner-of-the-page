@@ -61,6 +61,8 @@ def generate(copy_to: str) -> None:
         with tag("body"):
             with tag("div", klass="container"):
                 for file in sorted(data_dir.iterdir(), reverse=True):
+                    if file.suffix not in {".jpg", ".png"}:
+                        continue
                     print(f"Generated {file.name} card")
                     with tag("article"):
                         with tag("a", href=f"images/{file.name}", target="_blank"):
