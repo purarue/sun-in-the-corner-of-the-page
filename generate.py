@@ -8,7 +8,7 @@ data_file = this_dir / "data.yaml"
 
 import click
 from yattag.doc import Doc
-from yaml import safe_load
+from yaml import safe_load, safe_dump
 
 
 @click.command()
@@ -35,25 +35,10 @@ def generate(copy_to: str) -> None:
             with tag("style"):
                 # ligt blue background color
                 text(
-                    """
-                    html,body {
-                        background-color: #e6f1ff;
-                    }
-                    body {
-                        margin: 0;
-                    }
-                    /* limit height of images to 90% of viewport */
-                    /* center images */
-                    img {
-                        max-height: 90vh;
-                        display: block;
-                        margin-left: auto;
-                        margin-right: auto;
-                    }
-                    footer {
-                        text-align: center;
-                    }
-                    """
+                    """html,body {background-color: #e6f1ff;}
+body {margin: 0;}
+img {max-height: 90vh; display: block; margin-left: auto; margin-right: auto; }
+footer { text-align: center; }"""
                 )
             with tag("title"):
                 text("Suns in the Corner of the Page")
@@ -62,6 +47,7 @@ def generate(copy_to: str) -> None:
             with tag("div", klass="container"):
                 for file in sorted(data_dir.iterdir(), reverse=True):
                     if file.suffix not in {".jpg", ".png"}:
+                        print(f"Skipping {file.name}")
                         continue
                     print(f"Generated {file.name} card")
                     with tag("article"):
@@ -72,6 +58,13 @@ def generate(copy_to: str) -> None:
                                 text(metadata[file.name]["text"])
                             except (KeyError, TypeError):
                                 print(f"Missing metadata for {file.name}")
+                                # write to yaml file
+                                metadata[file.name] = {
+                                    "text": input(
+                                        f"Enter text for {file.name}: "
+                                    ).strip()
+                                }
+                                data_file.write_text(safe_dump(metadata))
                                 raise
 
     # write to file
