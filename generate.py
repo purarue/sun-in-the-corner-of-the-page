@@ -60,7 +60,7 @@ def generate(copy_to: str) -> None:
 
         with tag("body"):
             with tag("div", klass="container"):
-                for file in sorted(data_dir.glob("*.jpg"), reverse=True):
+                for file in sorted(data_dir.iterdir(), reverse=True):
                     print(f"Generated {file.name} card")
                     with tag("article"):
                         with tag("a", href=f"images/{file.name}", target="_blank"):
@@ -85,7 +85,7 @@ def generate(copy_to: str) -> None:
 
     assert target.is_dir()
     shutil.copy(output_file, target)
-    shutil.copytree(data_dir, target / "images")
+    shutil.copytree(data_dir, target / "images", dirs_exist_ok=True)
 
 
 if __name__ == "__main__":
