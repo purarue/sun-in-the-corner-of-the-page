@@ -1,3 +1,7 @@
+### Superceded by <https://sean.fish/x/notes/art/suns/>
+
+---
+
 Single page generator using [yattag](https://www.yattag.org/)
 
 <https://sean.fish/suns>
