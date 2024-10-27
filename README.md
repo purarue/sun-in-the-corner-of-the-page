@@ -1,7 +1,3 @@
-### Superceded by <https://purarue.xyz/x/notes/art/suns/>
-
----
-
 Single page generator using [yattag](https://www.yattag.org/)
 
 <https://purarue.xyz/suns>
