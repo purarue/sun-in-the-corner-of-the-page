@@ -1,10 +1,10 @@
-### Superceded by <https://sean.fish/x/notes/art/suns/>
+### Superceded by <https://purarue.xyz/x/notes/art/suns/>
 
 ---
 
 Single page generator using [yattag](https://www.yattag.org/)
 
-<https://sean.fish/suns>
+<https://purarue.xyz/suns>
 
 ```
 python3 -m pip install -r requirements.txt
